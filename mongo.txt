@@ -1,0 +1,27 @@
+use db_name_here
+//db.Assignment.drop()
+db.createCollection("Assignment")
+
+// 1. Create a MongoDB with the previous information.
+assignment1 = {Name: 'Brown', Student_number:8, Class:2, Major: 'CS', Course_name: 'Database', Course_number: 'CS3380', Credit_hours: 3, Department: 'CS', Section_identifier: 135, Semester: 'Fall', Year: '08', Instructor: 'Stone', Grade: 'A', Prerequisite_number: 'CS3320'}
+assignment2 = {Name: 'Brown', Student_number:8, Class:2, Major: 'CS', Course_name: 'Database', Course_number: 'CS3380', Credit_hours: 3, Department: 'CS', Section_identifier: 135, Semester: 'Fall', Year: '08', Instructor: 'Stone', Grade: 'A', Prerequisite_number: 'MATH2410'}
+assignment3 = {Name: 'Brown', Student_number:8, Class:2, Major: 'CS', Course_name: 'Data Structures',Course_number: 'CS3320', Credit_hours: 4, Department: 'CS', Section_identifier: 102, Semester: 'Spring', Year: '08', Instructor: 'Knuth', Grade: 'B', Prerequisite_number: 'CS1310'}
+assignment4 = {Name: 'Brown', Student_number:8, Class:2, Major: 'CS', Course_name: 'Intro to Computer Science',Course_number: 'CS1310', Credit_hours: 4, Department: 'CS', Section_identifier: 92, Semester: 'Fall', Year: '07', Instructor: 'Anderson', Grade: 'A', Prerequisite_number: null}
+assignment5 = {Name: 'Smith', Student_number:17, Class:1, Major: 'CS', Course_name: 'Intro to Computer Science', Course_number: 'CS1310', Credit_hours: 4, Department: 'CS', Section_identifier: 119, Semester: 'Fall', Year: '08', Instructor: 'Anderson', Grade: 'C', Prerequisite_number: null}
+assignment6 = {Name: 'Brown', Student_number:8, Class:2, Major: 'CS', Course_name: 'Discrete Mathematics', Course_number: 'MATH2410', Credit_hours: 3, Department: 'MATH', Section_identifier: 85, Semester: 'Fall', Year: '07', Instructor: 'King', Grade: 'A', Prerequisite_number: null}
+assignment7 = {Name: 'Smith', Student_number:17, Class:1, Major: 'CS', Course_name: 'Discrete Mathematics', Course_number: 'MATH2410', Credit_hours: 3, Department: 'MATH', Section_identifier: 112, Semester: 'Fall', Year: '08', Instructor: 'Chang', Grade: 'B', Prerequisite_number: null}
+
+db.Assignment.insertMany([assignment1, assignment2, assignment3,
+                        assignment4, assignment5, assignment6, assignment7])
+
+//2. Write a MongoDB query to retrieve the transcript,
+//i.e., a list of courses and grades of “Smith”.
+db.Assignment.find({Name: "Smith"}, {Grade:1, Course_name: 1, _id:0})
+
+//3. Write a MongoDB query to retrieve the names of the students that took
+//the section of “Database” course offered in fall 08 and their grades in that section.
+db.Assignment.find({Course_name: "Database", Semester: "Fall", Year: "08"}, {Name:1, Grade: 1, _id:0}).limit(1)
+
+//4. Write a MongoDB query to retrieve the course_name of the prerequisites
+//of the “Database” course.
+db.Assignment.find({Course_name: "Database"}, {Prerequisite_number:1, _id:0})
