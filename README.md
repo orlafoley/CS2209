@@ -1,6 +1,5 @@
 # CS2209
-
-# Information Storage and Management II
+Information Storage and Management II
 
 
 Use of:
